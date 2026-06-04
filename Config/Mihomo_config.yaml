@@ -5,7 +5,7 @@
 
 # 官方文档: https://github.com/MetaCubeX/mihomo/blob/Meta/docs/config.yaml
 # 以 ';' 或 '#' 或 '//' 开头的配置文件行为注释行
-# ================
+# ===============
 
 p: &p {type: http, interval: 86400, health-check: {enable: true, url: http://1.1.1.1/generate_204, interval: 1800, timeout: 5000}}
 proxy-providers:
