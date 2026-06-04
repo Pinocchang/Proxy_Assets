@@ -5,6 +5,10 @@ on:
     paths:
       - 'Config/**' # 监听 Config 文件夹下的所有文件变化
 
+# 【核心修复】显式授予机器人向仓库写入和推送代码的权限
+permissions:
+  contents: write
+
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -25,7 +29,6 @@ jobs:
           echo "Current time is: $CURRENT_TIME"
           
           # 2. 找出在 Config 文件夹中被修改的文件列表
-          # git diff-tree 可以精准列出本次 push 修改的文件
           CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD | grep '^Config/' || true)
           
           if [ -z "$CHANGED_FILES" ]; then
@@ -38,10 +41,8 @@ jobs:
 
           # 3. 循环处理每一个被修改的文件
           echo "$CHANGED_FILES" | while read -r FILE; do
-            # 确保文件还存在（防止文件被删了导致报错）
             if [ -f "$FILE" ]; then
               echo "Updating date in: $FILE"
-              # 使用 sed 替换文件中的日期行
               sed -i "s/# 日期：.*/# 日期：${CURRENT_TIME}/g" "$FILE"
             fi
           done
@@ -51,7 +52,6 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          # 检查整个 Config 文件夹是否有日期行被改动
           if git diff --quiet Config/; then
             echo "No date adjustments needed."
           else
