@@ -3,7 +3,7 @@ name: Auto Update Config Date
 on:
   push:
     paths:
-      - 'mihomo.yaml' # 替换成你自己的配置文件名
+      - 'Config/Mihomo_config.yaml' # 替换成你自己的配置文件名
 
 jobs:
   update-date:
