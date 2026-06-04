@@ -1,8 +1,10 @@
-# Mihomo Version ≥ 1.19.23
+# mihomo 配置
+# 日期：2026-05-28 21:23:22
+# 配置作者：Pinocchang
+# 适用版本：所有使用 mihomo 核心的程序
+
 # 官方文档: https://github.com/MetaCubeX/mihomo/blob/Meta/docs/config.yaml
-#
 # 以 ';' 或 '#' 或 '//' 开头的配置文件行为注释行
-#
 # ================
 
 p: &p {type: http, interval: 86400, health-check: {enable: true, url: http://1.1.1.1/generate_204, interval: 1800, timeout: 5000}}
@@ -47,7 +49,7 @@ dns:
 
 # 锚点参数修改
 # 修复：让服务策略组具备外挂节点组和区域组的能力，不再是死锁状态
-pg: &pg {type: select, proxies: [手动切换, 0.1节点, 美国节点, 香港节点, 日本节点, 台湾节点, 狮城节点, All Nodes, DIRECT]}
+pg: &pg {type: select, proxies: [手动切换, 0.1节点, 美国节点, 香港节点, DIRECT, All Nodes]}
 select: &select {type: select, include-all: true}
 c: &c {type: http, behavior: classical, format: text, interval: 86400}
 
@@ -68,7 +70,8 @@ proxy-groups:
   # 3. 分流业务组（继承修复后的 pg 锚点，默认继承“手动切换”，亦可单独自选）
   - {name: 国外网站, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png}
   - {name: 国际媒体, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png}
-  - {name: 苹果服务, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_1.png}
+  - {name: 苹果服务, <<: proxies: [DIRECT, 手动切换, 美国节点, All Nodes], icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_1.png}
+  - {name: Github, <<: proxies: [手动切换, DIRECT, 美国节点, All Nodes], icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Github.png}
   - {name: 微软服务, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png}
   - {name: 谷歌服务, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png}
   - {name: 电报消息, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png}
@@ -77,7 +80,7 @@ proxy-groups:
   - {name: 游戏平台, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png}
   - {name: Emby, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png}
   - {name: Spotify, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png}
-  - {name: 兜底分流, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png}
+  - {name: 兜底分流, <<: proxies: [手动切换, DIRECT, 美国节点, All Nodes], icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png}
 
 
 rule-providers:
@@ -114,7 +117,7 @@ rules:
   
   # 特殊业务分流
   - RULE-SET,AI,AI
-  - RULE-SET,Github,手动切换
+  - RULE-SET,Github,Github
   - RULE-SET,OneDrive,微软服务
   - RULE-SET,Microsoft,微软服务
   
