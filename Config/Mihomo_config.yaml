@@ -70,8 +70,8 @@ proxy-groups:
   # 3. 分流业务组（继承修复后的 pg 锚点，默认继承“手动切换”，亦可单独自选）
   - {name: 国外网站, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png}
   - {name: 国际媒体, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png}
-  - {name: 苹果服务, <<: proxies: [DIRECT, 手动切换, 美国节点, All Nodes], icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_1.png}
-  - {name: Github, <<: proxies: [手动切换, DIRECT, 美国节点, All Nodes], icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Github.png}
+  - {name: 苹果服务, <<: *select, proxies: [DIRECT, 手动切换, 美国节点, All Nodes], icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_1.png}
+  - {name: Github, <<: *select, proxies: [手动切换, DIRECT, 美国节点, All Nodes], icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Github.png}
   - {name: 微软服务, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png}
   - {name: 谷歌服务, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png}
   - {name: 电报消息, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png}
@@ -80,7 +80,7 @@ proxy-groups:
   - {name: 游戏平台, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png}
   - {name: Emby, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png}
   - {name: Spotify, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png}
-  - {name: 兜底分流, <<: proxies: [手动切换, DIRECT, 美国节点, All Nodes], icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png}
+  - {name: 兜底分流, <<: *select, proxies: [手动切换, DIRECT, 美国节点, All Nodes], icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png}
 
 
 rule-providers:
