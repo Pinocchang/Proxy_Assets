@@ -1,0 +1,38 @@
+name: Auto Update Config Date
+
+on:
+  push:
+    paths:
+      - 'mihomo.yaml' # 替换成你自己的配置文件名
+
+jobs:
+  update-date:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set current date
+        run: |
+          # 1. 获取当前北京时间（UTC+8）并格式化
+          CURRENT_TIME=$(date -d "+8 hours" +"%Y-%m-%d %H:%M:%S")
+          echo "Current time is: $CURRENT_TIME"
+          
+          # 2. 使用 sed 替换文件中的日期行（匹配 # 日期：开头的行）
+          sed -i "s/# 日期：.*/# 日期：${CURRENT_TIME}/g" mihomo.yaml
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # 检查是否有内容变化，防止死循环
+          if git diff --quiet; then
+            echo "No changes in date line."
+          else
+            git add mihomo.yaml
+            git commit -m "chore: auto update config date [skip ci]"
+            git push
+          fi
