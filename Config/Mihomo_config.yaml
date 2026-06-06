@@ -84,6 +84,8 @@ proxy-groups:
 
 
 rule-providers:
+  Pinocahang_Direct: {<<: *c, url: https://github.com/Pinocchang/Proxy_Res/raw/refs/heads/main/Rules/Direct_Rules}
+  Pinocahang_Proxy: {<<: *c, url: https://github.com/Pinocchang/Proxy_Res/raw/refs/heads/main/Rules/Proxy_Rules}
   Direct: {<<: *c, url: https://github.com/Repcz/Tool/raw/X/mihomo/Rules/Direct.list}
   Lan: {<<: *c, url: https://github.com/Repcz/Tool/raw/X/mihomo/Rules/Lan.list}
   Reject: {<<: *c, url: https://github.com/Repcz/Tool/raw/X/mihomo/Rules/Reject.list}
