@@ -113,6 +113,9 @@ rule-providers:
   Proxy: {<<: *c, url: https://github.com/Repcz/Tool/raw/X/mihomo/Rules/Proxy.list}
 
 rules:
+  # 自定义
+  - RULE-SET,123pan,DIRECT
+ 
   # 最高优先级预留给 局域网 和 广告拦截
   - RULE-SET,Lan,DIRECT
   - RULE-SET,Reject,REJECT
