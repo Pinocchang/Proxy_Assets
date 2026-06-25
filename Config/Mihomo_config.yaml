@@ -97,7 +97,7 @@ rule-providers:
   Microsoft: {<<: *c, url: https://github.com/Repcz/Tool/raw/X/mihomo/Rules/Microsoft.list}
   OneDrive: {<<: *c, url: https://github.com/Repcz/Tool/raw/X/mihomo/Rules/OneDrive.list}
   Github: {<<: *c, url: https://github.com/Repcz/Tool/raw/X/mihomo/Rules/Github.list}
-  YouTube_Muisc: {<<: *c, url: https://rule.kelee.one/Loon/YouTubeMusic.lsr}
+  YouTube_Music: {<<: *c, url: https://rule.kelee.one/Loon/YouTubeMusic.lsr}
   YouTube: {<<: *c, url: https://github.com/Repcz/Tool/raw/X/mihomo/Rules/YouTube.list}
   Google: {<<: *c, url: https://github.com/Repcz/Tool/raw/X/mihomo/Rules/Google.list}
   Telegram: {<<: *c, url: https://github.com/Repcz/Tool/raw/X/mihomo/Rules/Telegram.list}
