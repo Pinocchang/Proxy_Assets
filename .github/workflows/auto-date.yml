@@ -3,9 +3,10 @@ name: Auto Update Config Date
 on:
   push:
     paths:
-      - 'Config/**' # 监听 Config 文件夹下的所有文件变化
+      - 'Config/**'
+      - 'Rules/**'
 
-# 【核心修复】显式授予机器人向仓库写入和推送代码的权限
+# 允许 GitHub Actions 提交修改
 permissions:
   contents: write
 
@@ -15,47 +16,69 @@ env:
 jobs:
   update-date:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           persist-credentials: true
-          fetch-depth: 2 # 必须加上这个，以便获取上一次提交的对比
+          fetch-depth: 2
 
       - name: Set current date and update changed files
         run: |
-          # 1. 获取当前北京时间（UTC+8）
+          # 1. 获取北京时间
           CURRENT_TIME=$(date -d "+8 hours" +"%Y-%m-%d %H:%M:%S")
           echo "Current time is: $CURRENT_TIME"
-          
-          # 2. 找出在 Config 文件夹中被修改的文件列表
-          CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD | grep '^Config/' || true)
-          
+
+
+          # 2. 获取本次提交修改的 Config 和 Rules 文件
+          CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD | grep -E '^(Config|Rules)/' || true)
+
+
           if [ -z "$CHANGED_FILES" ]; then
-            echo "No files changed in Config/ directory."
+            echo "No files changed in Config/ or Rules/ directory."
             exit 0
           fi
+
 
           echo "Detected changed files:"
           echo "$CHANGED_FILES"
 
-          # 3. 循环处理每一个被修改的文件
+
+          # 3. 更新日期
           echo "$CHANGED_FILES" | while read -r FILE; do
+
             if [ -f "$FILE" ]; then
+
               echo "Updating date in: $FILE"
-              sed -i "s/# 日期：.*/# 日期：${CURRENT_TIME}/g" "$FILE"
+
+              sed -i \
+              "s/# 日期[：:].*/# 日期：${CURRENT_TIME}/g" \
+              "$FILE"
+
             fi
+
           done
+
 
       - name: Commit and Push changes
         run: |
+
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          
-          if git diff --quiet Config/; then
+
+
+          # 检查 Config 和 Rules 是否有变化
+          if git diff --quiet -- Config Rules; then
+
             echo "No date adjustments needed."
+
           else
-            git add Config/
+
+            git add Config/ Rules/
+
             git commit -m "chore: auto update config date [skip ci]"
+
             git push
+
           fi
