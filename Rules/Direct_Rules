@@ -8,3 +8,9 @@ DOMAIN,api.opensubtitles.com
 DOMAIN,assrt.net
 DOMAIN,123pan.com
 DOMAIN,123pan.cn
+
+# asmr1.cc
+DOMAIN,asmr1.cc
+DOMAIN-SUFFIX,morphify.net
+DOMAIN-SUFFIX,abyssplayer.com
+DOMAIN-SUFFIX,sssrr.org
