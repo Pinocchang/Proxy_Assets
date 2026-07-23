@@ -117,7 +117,9 @@ rule-providers:
 rules:
   # 自定义
   - RULE-SET,123pan,DIRECT
- 
+  - RULE-SET,Pinocahang_Direct,DIRECT
+  - RULE-SET,Pinocahang_Proxy,手动切换
+  
   # 最高优先级预留给 局域网 和 广告拦截
   - RULE-SET,Lan,DIRECT
   - RULE-SET,Reject,REJECT
