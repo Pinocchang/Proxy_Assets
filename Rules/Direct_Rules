@@ -17,3 +17,8 @@ DOMAIN-SUFFIX,sssrr.org
 
 # macapp.org.cn
 DOMAIN, macapp.org.cn
+
+# 字幕库
+DOMAIN, srtku.com
+DOMAIN, zimuku.org
+DOMAIN, zmk.pw
