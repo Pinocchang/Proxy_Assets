@@ -139,7 +139,7 @@ rules:
   
   # 社交与通讯
   - RULE-SET,Twitter,推特消息
-  - RULE-SET,Telegram,电报消息
+  - RULE-SET,Telegram,Telegram
   
   # 游戏与音乐
   - RULE-SET,Steam,游戏平台
