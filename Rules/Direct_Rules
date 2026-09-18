@@ -22,3 +22,6 @@ DOMAIN, macapp.org.cn
 DOMAIN, srtku.com
 DOMAIN, zimuku.org
 DOMAIN, zmk.pw
+
+# figma
+DOMAIN-SUFFIX,figma.com
